@@ -1,0 +1,35 @@
+<h3>My Products</h3>
+<% @products.each do |product| %>
+  <div>
+    <!-- Read/Display Product -->
+    <%= product.name %>
+
+    <!-- Update Product Name -->
+    <%= form_with model: @product, url: update_product_path(product.id), method: :patch do |form| %>
+      <div>
+        <%= form.label :name, "Edit Name" %>
+        <%= form.text_field :name %>
+      </div>
+      <div>
+        <%= form.submit "Update" %>
+      </div>
+    <% end %>
+
+    <!-- Delete Product -->
+    <%= button_to "Delete", delete_product_path(product.id), method: :delete, data: { confirm: "Are you sure?" } %>
+  </div>
+<% end %>
+
+<!-- Create Product -->
+<h3>Create a Product</h3>
+<%= form_with model: @product, url: products_path, method: :post do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
